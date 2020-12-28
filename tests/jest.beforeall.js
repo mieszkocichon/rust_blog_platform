@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 const { spawnSync } = require('child_process');
-const debug = require('debug')('canduma:jest.beforeall.js');
+const debug = require('debug')('rblog:jest.beforeall.js');
 require('dotenv').config({ path: '.env' });
 
 
@@ -14,8 +14,8 @@ module.exports = async () => {
       PORT: process.env.PORT || 3000,
       BRIDALLIVE_RUN_SYNC: false,
     };
-    console.log('\n$ killall canduma');
-    spawnSync('killall', ['canduma'], { stdio: 'inherit' });
+    console.log('\n$ killall rblog');
+    spawnSync('killall', ['rblog'], { stdio: 'inherit' });
     console.log('\n$ cargo build');
     const build = spawnSync('cargo', ['build'], { stdio: 'inherit' });
     debug('build = %o', build);
@@ -23,7 +23,7 @@ module.exports = async () => {
       reject(build.status);
       return;
     }
-    const bot = 'target/debug/canduma';
+    const bot = 'target/debug/rblog';
     console.log('\n$ ', bot);
     const api = spawn(bot, [], {
       // cwd: path.join(__dirname),

@@ -1,2 +1,2 @@
-web: ./target/release/canduma
+web: ./target/release/rblog
 release: ./target/release/diesel migration run

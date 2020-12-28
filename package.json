@@ -1,10 +1,10 @@
 {
-  "name": "canduma",
+  "name": "rblog",
   "private": true,
   "scripts": {
     "lint": "nopenv pre-commit run --all-files",
     "test": "cross-env NODE_ENV=test jest",
-    "testci": "cross-env RUST_LOG=debug DEBUG=canduma:* NODE_ENV=test jest",
+    "testci": "cross-env RUST_LOG=debug DEBUG=rblog:* NODE_ENV=test jest",
     "install": "npip install"
   },
   "husky": {
