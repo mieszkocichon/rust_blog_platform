@@ -12,6 +12,7 @@ mod graphql;
 mod jwt;
 mod schema;
 mod user;
+mod post;
 
 use actix_identity::{CookieIdentityPolicy, IdentityService};
 use actix_web::{App, HttpServer, web};
@@ -70,6 +71,7 @@ async fn main() -> std::io::Result<()> {
             ))
             // Sets routes via secondary files
             .configure(user::route)
+            .configure(post::route)
             .configure(graphql::route)
     })
     // Running at `format!("{}:{}",port,"0.0.0.0")`
