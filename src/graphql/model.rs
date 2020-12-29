@@ -5,6 +5,8 @@ use crate::jwt::model::{DecodedToken, Token};
 use crate::user::model::{LoggedUser, SlimUser, User, UserData};
 use crate::user::service as user;
 use crate::user::service::token::ClaimsResponse;
+use crate::post::model::{Post};
+use crate::post::service as post;
 use diesel::PgConnection;
 use juniper::Context as JuniperContext;
 use std::sync::Arc;
@@ -53,6 +55,19 @@ impl QueryRoot {
 
     pub fn decode_token(context: &Context) -> ServiceResult<&ClaimsResponse> {
         user::token::decode(&context)
+    }
+
+    pub fn posts(
+        context: &Context,
+        limit: Option<i32>,
+        offset: Option<i32>,
+    ) -> ServiceResult<Vec<Post>> {
+        let limit: i32 = limit.unwrap_or(100);
+        let offset: i32 = offset.unwrap_or(0);
+
+        crate::user::has_role(&context.user, "user")?;
+
+        post::consume::consume_all_posts(&context, limit, offset)
     }
 }
 

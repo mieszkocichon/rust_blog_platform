@@ -13,7 +13,6 @@ pub struct Post {
     pub tags: String,
 }
 
-
 #[derive(Insertable, Deserialize)]
 #[table_name = "posts"]
 pub struct InsertablePost {
