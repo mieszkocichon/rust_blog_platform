@@ -1,7 +1,7 @@
 use crate::schema::*;
 use chrono::*;
 
-#[derive(Debug, Serialize, Deserialize, Queryable, juniper::GraphQLObject)]
+#[derive(Debug, Serialize, Deserialize, Queryable, Identifiable, juniper::GraphQLObject)]
 pub struct Post {
     pub id: i32,
     pub title: String,
@@ -11,7 +11,7 @@ pub struct Post {
     pub post_type: i32,
     pub published: bool,
     pub tags: String,
-    pub owner_id: String,
+    pub owner: String,
 }
 
 #[derive(Insertable, Deserialize)]
@@ -23,8 +23,10 @@ pub struct InsertablePost {
     pub updated_at: NaiveDateTime,
     pub post_type: i32,
     pub published: bool,
+    #[column_name = "tags"]
     pub tags: String,
-    pub owner_id: String,
+    #[column_name = "owner"]
+    pub owner: String,
 }
 
 #[derive(Debug, Deserialize, juniper::GraphQLInputObject)]
@@ -35,11 +37,34 @@ pub struct PostData {
     pub tags: String,
 }
 
+#[derive(Debug, Deserialize, juniper::GraphQLInputObject)]
+pub struct PostDataEdit {
+    pub id: i32,
+    pub title: String,
+    pub raw_content: String,
+    pub post_type: i32,
+    pub tags: String,
+}
+
+#[derive(Debug, Deserialize, juniper::GraphQLInputObject)]
+pub struct PostDataStatusRq {
+    pub id: i32,
+}
+
+#[derive(Debug, Deserialize, juniper::GraphQLInputObject)]
+pub struct PostDataDisable {
+    pub id: i32,
+    pub published: bool,
+}
+
+
 #[derive(Debug, Serialize, Deserialize, Clone, juniper::GraphQLObject)]
 pub struct SlimPost {
     pub title: String,
     pub raw_content: String,
     pub tags: String,
+    pub id: i32,
+    pub published: bool,
 }
 
 impl From<PostData> for InsertablePost {
@@ -59,7 +84,7 @@ impl From<PostData> for InsertablePost {
             post_type,
             published: true,
             tags,
-            owner_id: "".to_string(),
+            owner: "".to_string(),
         }
     }
 }
@@ -69,6 +94,8 @@ impl From<Post> for SlimPost {
             title,
             raw_content,
             tags,
+            id,
+            published,
             ..
         } = post;
 
@@ -76,6 +103,8 @@ impl From<Post> for SlimPost {
             title,
             raw_content,
             tags,
+            id,
+            published,
         }
     }
 }

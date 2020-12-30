@@ -7,7 +7,7 @@ table! {
         updated_at -> Timestamp,
         post_type -> Int4,
         published -> Bool,
-        owner_id -> Varchar,
+        owner -> Varchar,
         tags -> Varchar,
     }
 }
