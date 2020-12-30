@@ -11,6 +11,7 @@ pub struct Post {
     pub post_type: i32,
     pub published: bool,
     pub tags: String,
+    pub owner_id: String,
 }
 
 #[derive(Insertable, Deserialize)]
@@ -23,6 +24,7 @@ pub struct InsertablePost {
     pub post_type: i32,
     pub published: bool,
     pub tags: String,
+    pub owner_id: String,
 }
 
 #[derive(Debug, Deserialize, juniper::GraphQLInputObject)]
@@ -46,7 +48,7 @@ impl From<PostData> for InsertablePost {
             title,
             raw_content,
             post_type,
-            tags
+            tags,
         } = post_data;
 
         Self {
@@ -57,6 +59,7 @@ impl From<PostData> for InsertablePost {
             post_type,
             published: true,
             tags,
+            owner_id: "".to_string(),
         }
     }
 }

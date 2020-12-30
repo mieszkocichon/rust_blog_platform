@@ -4,6 +4,7 @@
 node_modules/
 python_modules/
 .history
+.vscode
 
 # ---> Node
 # Logs

@@ -13,6 +13,6 @@ pub async fn publish(
 ) -> Result<HttpResponse, ServiceError> {
     match logged_user.0 {
         None => Ok(HttpResponse::Unauthorized().json(ServiceError::Unauthorized)),
-        Some(_user) => post::publish(post_data.into_inner(), pool).map(|res| HttpResponse::Ok().json(&res)),
+        Some(user) => post::publish(user, post_data.into_inner(), pool).map(|res| HttpResponse::Ok().json(&res)),
     }
 }

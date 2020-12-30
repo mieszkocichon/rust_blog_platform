@@ -6,5 +6,6 @@ CREATE TABLE posts (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at timestamp without time zone NOT NULL,
     post_type integer NOT NULL,
-    published boolean DEFAULT false NOT NULL
+    published boolean DEFAULT false NOT NULL,
+    owner_id varchar NOT NULL
 );
