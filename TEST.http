@@ -1,11 +1,11 @@
 ###
 # @name graphqli
-GET http://canduma.localhost.tv:3000/
+GET http://rblog.localhost.tv:3000/
 
 
 ###
 # @name register
-POST http://canduma.localhost.tv:3000/user/register HTTP/1.1
+POST http://rblog.localhost.tv:3000/user/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ###
 # @name login
-POST http://canduma.localhost.tv:3000/user/login HTTP/1.1
+POST http://rblog.localhost.tv:3000/user/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -26,12 +26,12 @@ Content-Type: application/json
 
 ###
 # @name getMyAccount
-GET http://canduma.localhost.tv:3000/user/me HTTP/1.1
+GET http://rblog.localhost.tv:3000/user/me HTTP/1.1
 
 
 ###
 # @name getJwtToken
-POST http://canduma.localhost.tv:3000/graphql HTTP/1.1
+POST http://rblog.localhost.tv:3000/graphql HTTP/1.1
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
 
@@ -46,7 +46,7 @@ query tokenQuery {
 
 @jwtToken = {{getJwtToken.response.body.$.data.generateToken.bearer}}
 
-POST http://canduma.localhost.tv:3000/graphql HTTP/1.1
+POST http://rblog.localhost.tv:3000/graphql HTTP/1.1
 Authorization: Bearer {{jwtToken}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -63,7 +63,7 @@ query decodeTokenQuery {
 
 ###
 # @name listUsers
-POST http://canduma.localhost.tv:3000/graphql HTTP/1.1
+POST http://rblog.localhost.tv:3000/graphql HTTP/1.1
 Authorization: Bearer {{jwtToken}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -80,7 +80,7 @@ query ListUsers {
 ###
 # @name listUsers
 # @return "message": "LIMIT must not be negative"
-POST http://canduma.localhost.tv:3000/graphql HTTP/1.1
+POST http://rblog.localhost.tv:3000/graphql HTTP/1.1
 Authorization: Bearer {{jwtToken}}
 Content-Type: application/json
 X-REQUEST-TYPE: GraphQL
@@ -98,6 +98,6 @@ query ListUsers {
 
 ###
 # @name logout
-GET http://canduma.localhost.tv:3000/user/logout HTTP/1.1
+GET http://rblog.localhost.tv:3000/user/logout HTTP/1.1
 
 ###

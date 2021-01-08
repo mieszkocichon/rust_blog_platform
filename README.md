@@ -2,7 +2,7 @@
 [![Status](https://img.shields.io/badge/build-passing-brightgreen)]()
 [![Status](https://img.shields.io/badge/pull--request-open-blue)]()
 
-# Canduma rust authentication server boilerplate
+# Rblog rust authentication server boilerplate
 
 `A Rust authentication server with GraphQL API, Diesel, PostgreSQL session authentication and JWT`
 
@@ -30,7 +30,7 @@ Statistics        Avg      Stdev        Max
   Throughput:    20.75MB/s
 ```
 
-## Collection of major crates used in Canduma
+## Collection of major crates used in Rblog
 
 - actix - [link](https://actix.rs/)
 - actix-web - [link](https://docs.rs/actix-web/)
@@ -54,11 +54,11 @@ Statistics        Avg      Stdev        Max
 ## Getting Started
 
 ```sh
-git clone https://github.com/clifinger/canduma.git
-cd canduma
+git clone https://github.com/mieszkocichon/rust_blog_platform.git
+cd rblog
 docker-compose up
 cp .env.example .env
-diesel setup --database-url='postgres://postgres:canduma@localhost/canduma'
+diesel setup --database-url='postgres://postgres:rblog@localhost/rblog'
 diesel migration run
 cargo run
 ```
@@ -139,7 +139,7 @@ See / open TEST.http file in vscode.
 ```sh
 cargo build --release
 cd target/release
-./canduma
+./rblog
 ```
 
 ## Security
@@ -190,36 +190,36 @@ First run `yarn` or `npm install` to get all required packages
 
 To run you can use `npm run test` or `yarn test`.
 
-The testing system designed to automatically build `canduma` offline and start in `tests/jest.beforeall.js`
-We starting `canduma` in order to capture output from both rust and js code using `testci` target
+The testing system designed to automatically build `rblog` offline and start in `tests/jest.beforeall.js`
+We starting `rblog` in order to capture output from both rust and js code using `testci` target
 
 #### npm run testci
 
 ```bash
 $ npm run testci
 
-> canduma@ testci /home/olexiyb/b100pro/canduma
-> cross-env RUST_LOG=debug DEBUG=canduma:* NODE_ENV=test jest
+> rblog@ testci /home/olexiyb/b100pro/rblog
+> cross-env RUST_LOG=debug DEBUG=rblog:* NODE_ENV=test jest
 
 Determining test suites to run...
-$ killall canduma
-canduma: no process found
+$ killall rblog
+rblog: no process found
 
 $ cargo build
     Finished dev [unoptimized + debuginfo] target(s) in 0.07s
-  canduma:jest.beforeall.js build = { status: 0, signal: null, output: [ null, null, null ], pid: 2447, stdout: null, stderr: null } +0ms
+  rblog:jest.beforeall.js build = { status: 0, signal: null, output: [ null, null, null ], pid: 2447, stdout: null, stderr: null } +0ms
 
-$  target/debug/canduma
+$  target/debug/rblog
 [2020-04-02T18:17:19Z INFO  actix_server::builder] Starting 24 workers
 [2020-04-02T18:17:19Z INFO  actix_server::builder] Starting server on 0.0.0.0:4000
 Listening on 0.0.0.0:4000
 started API 
 
-  canduma:user.test.js /user/me body='Unauthorized' text="Unauthorized" +0ms
+  rblog:user.test.js /user/me body='Unauthorized' text="Unauthorized" +0ms
 
 ...
-[2020-04-02T18:17:22Z DEBUG canduma::user::handler] user_string={"user_uuid":"f7cfa71e-096e-44d0-ae4f-7d16dd9e4baf","email":"email1@nowhere.com","role":"bad_role"}
-  canduma:user.test.js /graphql body={ data: null, errors: [ { message: 'Unauthorized', locations: [Array], path: [Array], extensions: [Object] } ] } +292ms
+[2020-04-02T18:17:22Z DEBUG rblog::user::handler] user_string={"user_uuid":"f7cfa71e-096e-44d0-ae4f-7d16dd9e4baf","email":"email1@nowhere.com","role":"bad_role"}
+  rblog:user.test.js /graphql body={ data: null, errors: [ { message: 'Unauthorized', locations: [Array], path: [Array], extensions: [Object] } ] } +292ms
  PASS  tests/user.test.js
  
 ...
